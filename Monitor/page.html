@@ -39,6 +39,9 @@
     var webcamStream;
     var isSnapshotTaken = false;
 
+    // todo: change the address
+    const apiAddr = "http://10.4.11.21:5100/";
+
     // Init code
     var canvas, ctx;
     function init() {
@@ -115,31 +118,38 @@
     function submitFace() {
       if (isSnapshotTaken) {
         // TODO: Test, Right or Wrong Face
-        // If wrong Face, show wrong face and trigger Restart()
-        showOTPInput();
-        // var canvas = document.getElementById("myCanvas");
-        // var ctx = canvas.getContext("2d");
-        // var imageData = canvas.toDataURL("image/jpeg");
-        // var imageObject = {
-        //   image: imageData,
-        // };
+        var canvas = document.getElementById("myCanvas");
+        var imageData = canvas
+          .toDataURL("image/jpeg")
+          .replace(/^data:image\/(png|jpeg);base64,/, "");
 
-        // fetch("https://example.com/api/upload", {
-        //   method: "POST",
-        //   body: JSON.stringify(imageObject),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // })
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     console.log("API Response:", data);
-        //     // Change the page content to display the OTP input and submit button
-        //     showOTPInput();
-        //   })
-        //   .catch((error) => {
-        //     console.error("Error:", error);
-        //   });
+        var formData = new FormData();
+        formData.append("image", imageData);
+
+        fetch(apiAddr + "verify", {
+          method: "POST",
+          mode: 'no-cors',
+          body: JSON.stringify({ img2_path: imageData }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("API Response:", data);
+
+            if (data.verified === true) {
+              // Verified, show OTP input
+              showOTPInput();
+            } else {
+              // Wrong Face, display message and Restart button
+              alert("Wrong Face!");
+              restart();
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       } else {
         console.log("No snapshot taken.");
       }

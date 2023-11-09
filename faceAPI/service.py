@@ -27,16 +27,3 @@ def verify(
         enforce_detection=enforce_detection,
     )
     return obj
-
-
-def analyze(img_path, actions, detector_backend, enforce_detection, align):
-    result = {}
-    demographies = DeepFace.analyze(
-        img_path=img_path,
-        actions=actions,
-        detector_backend=detector_backend,
-        enforce_detection=enforce_detection,
-        align=align,
-    )
-    result["results"] = demographies
-    return result

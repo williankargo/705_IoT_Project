@@ -1,9 +1,12 @@
 import argparse
-import api
+import app
+import logging
 
 if __name__ == "__main__":
-    deepface_app = api.create_app()
+    deepface_app = app.create_app()
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=5000, help="Port of serving api")
+    parser.add_argument(
+        "-p", "--port", type=int, default=5100, help="Port of serving api"
+    )
     args = parser.parse_args()
-    deepface_app.run(host="0.0.0.0", port=args.port)
+    deepface_app.run(host="0.0.0.0", port=args.port, debug=True)
