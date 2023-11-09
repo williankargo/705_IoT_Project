@@ -31,6 +31,7 @@ def check_face(frame):
 # While loop to detect face.
 counter = 0
 while True:
+    print("Hi")
     ret, frame = cap.read()
     if ret:
         if counter % 30 == 0:
