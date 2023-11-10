@@ -9,8 +9,6 @@ blueprint = Blueprint("routes", __name__)
 def home():
     return "<h1>Hello World!</h1>"
 
-
-# We mainly use this API in our IoT project
 @blueprint.route("/verify", methods=["POST"])
 def verify():
     try:
@@ -23,7 +21,6 @@ def verify():
         if img2_data is None:
             return jsonify({"error": "you must upload user picture"}), 400
 
-        # Assuming img2_data is a base64 string without the prefix 'data:image/jpeg;base64,'
         if not img2_data.startswith("data:image"):
             img2_data = f"data:image/jpeg;base64,{img2_data}"
 
@@ -35,10 +32,9 @@ def verify():
         distance_metric = input_args.get("distance_metric", "cosine")
         align = input_args.get("align", True)
 
-        # Call the verify function from your service module
         verification = service.verify(
             img1_path=img1_path,
-            img2_path=img2_data,  # Pass base64 data directly
+            img2_path=img2_data,
             model_name=model_name,
             detector_backend=detector_backend,
             distance_metric=distance_metric,
