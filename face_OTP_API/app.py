@@ -6,7 +6,7 @@ import logging
 
 def create_app():
     app = Flask(__name__)
-    app.logger.setLevel(logging.DEBUG)
+    # app.logger.setLevel(logging.DEBUG)
     CORS(app)  # CORS setting
     app.register_blueprint(blueprint)
     return app
