@@ -87,7 +87,6 @@ function stopWebcam() {
 // Submit the captured face to Face API
 function submitFace() {
   if (isSnapshotTaken) {
-    // TODO: Test, Right or Wrong Face
     var canvas = document.getElementById("myCanvas");
     var imageData = canvas.toDataURL("image/jpeg");
 
