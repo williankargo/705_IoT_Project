@@ -107,6 +107,7 @@ function submitFace() {
         if (data.verified === "True") {
           alert("Face is recognized!");
           // Verified, show OTP input
+          stopWebcam();
           showOTPInput();
         } else {
           // Wrong Face, display message and Restart button
