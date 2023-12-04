@@ -1,6 +1,6 @@
 from deepface import DeepFace
 
-
+# deepface verify function
 def verify(
     img1_path,
     img2_path,
