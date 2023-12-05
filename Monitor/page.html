@@ -1,0 +1,27 @@
+<!-- page.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Recognition and OTP Verification</title>
+  <script src="main.js"></script>
+  
+</head>
+<body onload="init();">
+  <h1>Step 1: Face recognition</h1>
+  <p>
+    <button id="snapshotBtn" onclick="snapshot();">Take Photo</button>
+    <button id="restartBtn" style="display: none" onclick="restart();">
+      Restart
+    </button>
+    <button id="submitBtn" style="display: none" onclick="submitFace();">
+      Submit
+    </button>
+  </p>
+  <div style="position: relative">
+    <video onclick="snapshot(this);" id="video" controls autoplay style="position: absolute; top: 0; left: 0"></video>
+    <canvas id="myCanvas" style="position: absolute; top: 0; left: 0"></canvas>
+  </div>
+
+</body>
+</html>
